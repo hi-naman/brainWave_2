@@ -1,3 +1,6 @@
+![Login Page](https://github.com/user-attachments/assets/1b57678e-ab43-4184-9871-6af9e5c92eb6)
+![App UI](https://github.com/user-attachments/assets/19502d4d-c558-430b-9773-9075fd07d435)
+
 # 🤖 AI-Powered Digital Twin for Productivity Automation
 
 A web platform that builds an AI-powered digital twin to enhance your productivity by automating repetitive tasks like email handling, scheduling, content summarization, and research assistance—learning your habits, tone, and preferences over time using NLP and Reinforcement Learning.
