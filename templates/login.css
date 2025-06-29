@@ -1,0 +1,232 @@
+/* Login Page Styles */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.login-container {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 0.5s ease-out;
+    /* Ensure the container stays centered */
+    position: relative;
+    margin: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container h1 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #2d3748;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.login-container p {
+    margin-bottom: 30px;
+    color: #718096;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Form Styles */
+#manual-sign-in-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s;
+    background-color: #f8fafc;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.form-group small {
+    color: #a0aec0;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Button Styles */
+.manual-login-btn, .google-sign-in-btn, #developer-bypass {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.manual-login-btn {
+    background-color: #667eea;
+    color: white;
+}
+
+.manual-login-btn:hover {
+    background-color: #5a6fd1;
+    transform: translateY(-1px);
+}
+
+.google-sign-in-btn {
+    background-color: #4285F4;
+    color: white;
+}
+
+.google-sign-in-btn:hover {
+    background-color: #357ABD;
+    transform: translateY(-1px);
+}
+
+.google-sign-in-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    background-color: white;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+#developer-bypass {
+    background-color: #f6ad55;
+    color: #2d3748;
+    margin-top: 15px;
+}
+
+#developer-bypass:hover {
+    background-color: #ed8936;
+    transform: translateY(-1px);
+}
+
+/* Toggle Link */
+.toggle-container {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #f8fafc;
+}
+
+#toggle-sign-in {
+    color: #4a5568;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+#toggle-sign-in:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.divider::before {
+    margin-right: 10px;
+}
+
+.divider::after {
+    margin-left: 10px;
+}
+
+/* Error Message */
+#google-sign-in-error {
+    color: #e53e3e;
+    background-color: #fff5f5;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 14px;
+    border: 1px solid #fed7d7;
+    display: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 20px;
+        margin: 0 15px;
+    }
+    
+    .login-container h1 {
+        font-size: 24px;
+    }
+}
+/* Add to your main-styles.css or login.css */
+.sign-out-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.3s;
+}
+
+.sign-out-btn:hover {
+    background-color: #d32f2f;
+}

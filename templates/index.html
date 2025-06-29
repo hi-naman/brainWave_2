@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Standard favicon -->
+<link rel="icon" href="Images/icon.png" type="image/x-icon">
+
+<!-- PNG icon -->
+<link rel="icon" href="Images/icon.png" type="image/png">
+
+<!-- Apple Touch Icon for iOS -->
+<link rel="apple-touch-icon" sizes="180x180" href="Images/icon.png">
+
+
+
+    <title>BRAINwave UI</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="Styles/main-styles.css">
+    <link rel="stylesheet" href="Styles/chatbox.css">
+    <link rel="stylesheet" href="Fonts/font.css">
+    <link rel="stylesheet" href="Styles/login.css">
+    <link rel="stylesheet" href="Styles/tasks-manager.css">
+    <link rel="stylesheet" href="Styles/feed.css">
+    <link rel="stylesheet" href="Styles/notification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Identity Services API -->
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai/dist/gemini-api.js"></script>
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="https://www.googleapis.com/calendar/v3/js"></script>
+</head>
+<body>
+    <!-- Login Page -->
+<div id="login-page" class="login-page">
+    <div class="login-container">
+        <h1>Welcome to BRAINwave !</h1>
+        
+        <!-- Google Sign-In Section -->
+        <div id="google-sign-in">
+            <p>Sign in with Google to continue</p>
+            <button class="google-sign-in-btn" onclick="handleFirebaseGoogleSignIn()">
+                <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-1024.png" alt="Google logo">
+                Sign in with Google
+            </button>
+            <div id="google-sign-in-error" style="display: none; color: red;">
+                Google Sign-In is currently unavailable. Please try manual sign-in.
+            </div>
+        </div>
+        
+        <!-- Manual Sign-In Section -->
+        <div id="manual-sign-in" style="display: none;">
+            <p>Sign in manually</p>
+            <form id="manual-sign-in-form">
+                <div class="form-group">
+                    <label for="manual-name">Name:</label>
+                    <input type="text" id="manual-name" required placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="manual-email">Email:</label>
+                    <input type="email" id="manual-email" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="manual-profile-pic">Profile Picture URL (optional):</label>
+                    <input type="url" id="manual-profile-pic" placeholder="https://example.com/your-image.jpg">
+                    <small>Leave blank to use default avatar</small>
+                </div>
+                <button type="submit" class="manual-login-btn">Sign In</button>
+            </form>
+        </div>
+        
+        <!-- Toggle between sign-in methods -->
+        <p class="toggle-container">
+            <a href="#" id="toggle-sign-in" onclick="toggleSignInMethod()">Use manual sign-in instead</a>
+        </p>
+
+        <!-- Developer Bypass Button -->
+        <button id="developer-bypass" onclick="developerBypass()">Developer Bypass</button>
+    </div> 
+</div>
+
+
+    <!-- Main Page (Hidden Initially) -->
+    <div id="main-page" class="container" style="display: none;">
+        <!-- Existing content of your main page -->
+        <div class="sidebar">
+            <div class="logo">BRAINwave</div>
+            <!-- In fixed-index.html, modify the tasks div -->
+            <div class="container">
+                <h1>Task Manager</h1>
+                <div class="task-input-container">
+                    <input type="text" id="task-input" placeholder="Add a new task">
+                    <button id="add-btn">Add</button>
+                </div>
+                <ul id="task-list" class="task-list">
+                    <!-- Tasks will be dynamically added here -->
+                </ul>
+            </div>
+        
+        </div>
+        
+        <div class="main">
+            <div class="ai-avatar">
+                <img src="Clips/LCPT.gif" alt="AI Avatar">
+                <div class="controls">
+                    <button onclick="playSound()">Talk</button>
+                    <button onclick="aiRespond()">Hey!</button>
+                    <button onclick="stopSound()">Stop</button>
+                </div>
+            </div>
+            <div class="chat-output" id="chat-output">
+                <!-- AI messages will appear here -->
+            </div>
+            <div class="chat-input">
+                
+                <input type="text" id="chat-message" placeholder="Wanna type to talk...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <div class="rightbar">
+            <div class="profile">
+                <div class="upper-profile"><img id="profile-picture" src="Images/avatar.png" alt="User Avatar">
+                <button oneclick="" class="notification-button"><img src="https://static.vecteezy.com/system/resources/previews/009/394/760/non_2x/bell-icon-transparent-notification-free-png.png" alt=""></button>
+                </div>
+                <div class="user-info">
+                    <h4 id="profile-name">ARYAN MISHRA</h4>
+                    <p id="profile-email">aryanmishra010@gmail.com</p>
+                </div>
+                <button onclick="handleFirebaseSignOut()">Sign Out</button>
+
+            </div>
+            <!-- Modified Feed Section with Toggle -->
+        <div class="feed">
+            <div class="task-title">FEED</div>
+            <div class="news-toggle-container">
+                <span class="toggle-label">Daily</span>
+                <label class="switch">
+                    <input type="checkbox" id="news-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label">Research</span>
+            </div>
+            <button onclick="fetchNews()">Fetch News</button>
+            <div id="news-list"></div>
+            <template id="template-news-card">
+                <div class="card">
+                    <div class="card-header">
+                        <!-- <img src="Images/LCPT-static.png" alt=""> -->
+                    </div>
+                    <div class="card-content">
+                        <h3 id="news-title">This is the Title</h3>
+                        <h6 id="news-source">End Gadgets</h6>
+                    </div>
+                </div>
+            </template>
+        </div>
+            <div class="quick-links">
+                <div class="quick-links-header">
+                    <div class="task-title">QUICK LINKS</div>
+                    <button class="add-link-btn" onclick="addNewLink()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="quick-links-buttons">
+                    <a href="https://open.spotify.com" target="_blank" class="quick-link-btn">
+                        <i class="fab fa-spotify"></i>
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" class="quick-link-btn">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://teams.microsoft.com" target="_blank" class="quick-link-btn">
+                        <i class="fab fa-microsoft"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Link Modal -->
+    <div id="add-link-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Add New Quick Link</h3>
+            <div class="modal-input-group">
+                <label for="link-name">Name:</label>
+                <input type="text" id="link-name" placeholder="e.g., Gmail">
+            </div>
+            <div class="modal-input-group">
+                <label for="link-url">URL:</label>
+                <input type="url" id="link-url" placeholder="https://example.com">
+            </div>
+            <div class="modal-input-group">
+                <label for="link-icon">Icon:</label>
+                <select id="link-icon">
+                    <option value="fa-globe">Website</option>
+                    <option value="fa-envelope">Email</option>
+                    <option value="fa-calendar">Calendar</option>
+                    <option value="fa-file">Documents</option>
+                    <option value="fa-image">Photos</option>
+                    <option value="fa-video">Video</option>
+                    <option value="fa-music">Music</option>
+                    <option value="fa-shopping-cart">Shopping</option>
+                    <option value="fa-gamepad">Gaming</option>
+                    <option value="fa-comments">Chat</option>
+                </select>
+            </div>
+            <button onclick="saveNewLink()">Save</button>
+        </div>
+    </div>
+
+    <audio id="talk-sound" src="Sounds/hello-46355.mp3"></audio>
+    <script src="Scripts/animations.js"></script>
+    <script src="Scripts/chatbox.js"></script>
+    <script src="Scripts/firebase-config.js"></script>
+    <script src="tasks-bar.js"></script>
+    <script src="Scripts/sign-in.js"></script>
+    <script src="Scripts/feed.js"></script>
+    <script src="Scripts/tasks-bar.js"></script>
+    <script src="Scripts/google-calendar-tasks.js"></script>
+    <script src="Scripts/notification.js"></script>
+</body>
+</html>

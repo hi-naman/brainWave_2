@@ -1,0 +1,171 @@
+/* Typing indicator */
+.typing-indicator {
+    display: flex;
+    padding: 10px 15px;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background-color: #4e8cff;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Typing indicator animation */
+.typing-indicator {
+    background-color: #e1f5fe;
+    padding: 10px;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    align-self: flex-start;
+}
+
+.typing-indicator span {
+    height: 8px;
+    width: 8px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: typingDots 1s infinite;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.user-message {
+    text-align: right;
+    background-color: #e6f2ff;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 70%;
+    align-self: flex-end;
+}
+
+.ai-message {
+    text-align: left;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 70%;
+    align-self: flex-start;
+}
+
+.error-message {
+    text-align: center;
+    color: red;
+    background-color: #ffeeee;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+#chat-output {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.chat-message {
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px 0;
+    max-width: 80%;
+}
+
+.user {
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+.ai {
+    background: #e0e0e0;
+    color: black;
+    align-self: flex-start;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chat-input button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background: #0056b3;
+}
+
+
+/* Add this to your chatbox.css file */
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.ai-avatar img.pulsating {
+    animation: pulsate 1s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(0, 120, 255, 0.7);
+    border-radius: 10px;
+}

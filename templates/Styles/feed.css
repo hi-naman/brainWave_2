@@ -1,0 +1,432 @@
+/* Add this to Styles/feed.css or create this file and link it in your HTML */
+
+/* News Card Styles */
+.card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-header img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.card .card-content {
+    padding: 12px;
+}
+
+.card .card-content h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.card .card-content h6 {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    font-weight: normal;
+}
+
+.card .news-summary {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Card removal animation */
+.card.removing {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Modal Styles */
+.news-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.news-modal.active {
+    opacity: 1;
+}
+
+.news-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.news-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slide-up 0.3s forwards;
+    animation-delay: 0.1s;
+}
+
+@keyframes slide-up {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.news-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-modal-close:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.news-modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.news-modal-header {
+    padding: 20px 20px 15px;
+}
+
+.news-modal-header h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.news-modal-source {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.news-modal-body {
+    padding: 0 20px 20px;
+    line-height: 1.6;
+    font-size: 16px;
+    color: #333;
+}
+
+.news-modal-actions {
+    padding: 0 20px 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.news-dislike-btn {
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.news-dislike-btn:hover {
+    background: #e0e0e0;
+}
+
+.news-dislike-btn i {
+    font-size: 16px;
+}
+
+/* For modal open state on body */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* News Modal Styles */
+.news-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hide-modal {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.news-modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.show-modal .news-modal-content {
+    transform: scale(1);
+}
+
+.news-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.news-modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    flex: 1;
+    padding-right: 15px;
+}
+
+.news-modal-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.news-modal-controls button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.close-modal-btn {
+    color: #555;
+}
+
+.close-modal-btn:hover {
+    background-color: #eee;
+}
+
+.dislike-btn {
+    color: #777;
+}
+
+.dislike-btn:hover {
+    background-color: #fee;
+    color: #e55;
+}
+
+.news-modal-body {
+    padding: 20px;
+}
+
+.news-image-container {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.news-image-container img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.news-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.news-metadata i {
+    margin-right: 5px;
+}
+
+.news-content {
+    line-height: 1.6;
+}
+
+.news-description {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.news-text {
+    margin-bottom: 20px;
+}
+
+.read-more-btn {
+    display: inline-block;
+    background-color: #4a90e2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.read-more-btn:hover {
+    background-color: #3a70b2;
+}
+
+/* Card animations */
+.card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+/* Background blur */
+.blur-background {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+
+/* Loading indicator */
+.news-loading-indicator {
+    padding: 20px;
+    text-align: center;
+}
+
+.loading-spinner {
+    display: inline-block;
+}
+
+.spinner-circle {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #4a90e2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .news-modal-content {
+        width: 95%;
+    }
+    
+    .news-modal-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .news-description {
+        font-size: 1rem;
+    }
+}
